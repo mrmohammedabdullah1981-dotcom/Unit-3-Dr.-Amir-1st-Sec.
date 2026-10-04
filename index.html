@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mega Goal 1.1 - Unit 3 Comprehensive Platform | Albayariq Schools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #0284c7;
+      --gold: #f59e0b;
+      --gold-dark: #b45309;
+      --dark-slate: #0f172a;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --correct: #10b981;
+      --wrong: #ef4444;
+      --font-main: 'Poppins', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* Top School Header */
+    header {
+      background: linear-gradient(135deg, #091124, #1e3a8a);
+      color: white;
+      padding: 24px 16px;
+      text-align: center;
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    header h2 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #93c5fd;
+      margin-top: 4px;
+    }
+
+    .school-info {
+      margin-top: 10px;
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .school-info span strong {
+      color: #fcd34d;
+    }
+
+    /* Navigation Tabs */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      background: #0f172a;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    .nav-tab-btn {
+      background: none;
+      border: none;
+      padding: 16px 24px;
+      color: #94a3b8;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: var(--font-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tab-btn:hover {
+      color: white;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .nav-tab-btn.active {
+      color: var(--gold);
+      border-bottom: 3px solid var(--gold);
+      background: rgba(245, 158, 11, 0.12);
+    }
+
+    .main-container {
+      max-width: 980px;
+      margin: 30px auto;
+      padding: 0 16px;
+    }
+
+    .view-content {
+      display: none;
+    }
+
+    .view-content.active {
+      display: block;
+      animation: fadeIn 0.35s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================== */
+    /* STYLES: STUDY GUIDE (LESSON EXPLANATION)                       */
+    /* ============================================================== */
+    .guide-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+    }
+
+    .guide-card h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.95rem;
+    }
+
+    .guide-table th, .guide-table td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    .guide-table th {
+      background: #f1f5f9;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .callout-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin: 14px 0;
+      font-size: 0.95rem;
+      color: #1e3a8a;
+    }
+
+    .callout-box strong {
+      color: #0f172a;
+    }
+
+    /* ============================================================== */
+    /* STYLES: FULL EXAM & QUESTIONS                                 */
+    /* ============================================================== */
+    .student-bar {
+      background: var(--card-bg);
+      padding: 18px 22px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .student-bar label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .student-bar input {
+      flex: 1;
+      min-width: 240px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: var(--font-main);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .student-bar input:focus {
+      border-color: var(--secondary);
+    }
+
+    .section-box {
+      background: var(--card-bg);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 26px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+    }
+
+    .section-title {
+      background: #f1f5f9;
+      padding: 16px 20px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .reading-passage {
+      background: #eff6ff;
+      border-left: 4px solid var(--secondary);
+      padding: 16px 20px;
+      margin: 16px 20px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .q-container {
+      padding: 18px 20px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .q-container:last-child {
+      border-bottom: none;
+    }
+
+    .q-text {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .q-text span.underlined {
+      text-decoration: underline;
+      color: #b45309;
+      font-weight: 700;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #ffffff;
+      font-size: 0.93rem;
+    }
+
+    .option-label:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .option-label.is-correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46;
+      font-weight: 600;
+    }
+
+    .option-label.is-wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      color: white;
+      border: none;
+      padding: 15px 42px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      border-radius: 35px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+      transition: all 0.3s;
+      font-family: var(--font-main);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+    }
+
+    /* Result Card */
+    .result-card {
+      display: none;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      text-align: center;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+    }
+
+    .score-circle span {
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    /* Certificate Box */
+    #certificateSection {
+      display: none;
+      margin: 30px auto;
+      max-width: 860px;
+    }
+
+    .certificate {
+      background: #fffcf4;
+      border: 12px solid #1e3a8a;
+      outline: 4px solid var(--gold);
+      padding: 40px 30px;
+      text-align: center;
+      position: relative;
+      border-radius: 6px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+      font-family: 'Cinzel', serif, Georgia;
+    }
+
+    .cert-school {
+      font-size: 1.4rem;
+      color: #0f172a;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .cert-sub {
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 22px;
+    }
+
+    .cert-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #92400e;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .cert-lead {
+      font-family: var(--font-main);
+      font-size: 1.05rem;
+      color: #475569;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .cert-name {
+      font-family: var(--font-main);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+      padding: 0 25px 4px;
+      margin-bottom: 18px;
+    }
+
+    .cert-body {
+      font-family: var(--font-main);
+      font-size: 1.02rem;
+      color: #334155;
+      max-width: 650px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    .cert-signatures {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 35px;
+      padding-top: 22px;
+      border-top: 1px solid #cbd5e1;
+      font-family: var(--font-main);
+    }
+
+    .sig-col {
+      text-align: center;
+    }
+
+    .sig-role {
+      font-size: 0.85rem;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .sig-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .cert-seal {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      border: 3px dashed var(--gold);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 0.78rem;
+      transform: rotate(-10deg);
+    }
+
+    .btn-print {
+      margin-top: 20px;
+      background: #0f172a;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-main);
+    }
+
+    /* ============================================================== */
+    /* STYLES: MILLIONAIRE GAME                                       */
+    /* ============================================================== */
+    .game-screen {
+      background: radial-gradient(circle at center, #0c1a40 0%, #030712 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 2px solid #1e3a8a;
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 24px;
+    }
+
+    @media (max-width: 820px) {
+      .game-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .lifelines {
+      display: flex;
+      gap: 12px;
+    }
+
+    .lifeline-btn {
+      background: #1e293b;
+      border: 2px solid var(--gold);
+      color: #fef08a;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lifeline-btn:hover:not(:disabled) {
+      transform: scale(1.1);
+      background: #2563eb;
+      color: white;
+    }
+
+    .lifeline-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      border-color: #64748b;
+      text-decoration: line-through;
+    }
+
+    .millionaire-q-box {
+      background: #0f172a;
+      border: 2px solid var(--secondary);
+      border-radius: 28px;
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 22px;
+      min-height: 85px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(2, 132, 199, 0.25);
+    }
+
+    .millionaire-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .millionaire-options {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mil-btn {
+      background: #111827;
+      border: 2px solid #334155;
+      color: white;
+      padding: 16px 18px;
+      border-radius: 24px;
+      font-family: var(--font-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+    }
+
+    .mil-btn strong {
+      color: var(--gold);
+      margin-right: 8px;
+    }
+
+    .mil-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      background: #1e293b;
+    }
+
+    .mil-btn.selected {
+      background: #d97706 !important;
+      border-color: #fef08a !important;
+      color: #fff;
+    }
+
+    .mil-btn.correct-glow {
+      background: #059669 !important;
+      border-color: #34d399 !important;
+      color: white;
+    }
+
+    .mil-btn.wrong-glow {
+      background: #dc2626 !important;
+      border-color: #f87171 !important;
+      color: white;
+    }
+
+    .money-ladder {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column-reverse;
+      gap: 4px;
+    }
+
+    .ladder-step {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #94a3b8;
+    }
+
+    .ladder-step.current {
+      background: var(--gold);
+      color: #0f172a;
+      font-weight: 800;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    }
+
+    .ladder-step.milestone {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-box {
+      background: #0f172a;
+      color: white;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-box h3 {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .modal-box button {
+      margin-top: 18px;
+      padding: 8px 24px;
+      background: var(--secondary);
+      border: none;
+      color: white;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #certificateSection, #certificateSection * {
+        visibility: visible;
+      }
+      #certificateSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .btn-print {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Banner -->
+  <header>
+    <h1>Albayariq Private Schools - Secondary Section</h1>
+    <h2>Mega Goal 1.1 • Unit 3: What Will Be, Will Be</h2>
+    <div class="school-info">
+      <span>English Teacher: <strong>Dr. Amir Yagoub</strong></span>
+      <span>Headmaster: <strong>Dr. Ibrahim Al-Osaimi</strong></span>
+      <span>Supervisor: <strong>Mohammed Othman</strong></span>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <button class="nav-tab-btn active" onclick="switchTab('guideTab')">
+      📖 Study Guide & Explanation
+    </button>
+    <button class="nav-tab-btn" onclick="switchTab('examTab')">
+      📝 Full Electronic Exam
+    </button>
+    <button class="nav-tab-btn" onclick="switchTab('gameTab')">
+      💰 Who Wants to Be a Millionaire?
+    </button>
+  </nav>
+
+  <div class="main-container">
+
+    <!-- ============================================================== -->
+    <!-- TAB 1: STUDY GUIDE & EXPLANATIONS                              -->
+    <!-- ============================================================== -->
+    <div id="guideTab" class="view-content active">
+
+      <!-- Section: Jules Verne & 1955 Predictions -->
+      <div class="guide-card">
+        <h3>1. A Vision of the Future (Jules Verne)</h3>
+        <p>In the late 1800s, French author <strong>Jules Verne</strong> wrote about the future and imagined technologies one hundred years ahead of his time:</p>
+        <ul style="margin: 12px 0 12px 24px;">
+          <li><strong>From the Earth to the Moon:</strong> Characters traveled into space using a <em>rocket</em>.</li>
+          <li><strong>20,000 Leagues Under the Sea:</strong> Characters explored deep oceans in a submarine shaped like a whale.</li>
+          <li><strong>Paris in the Twentieth Century:</strong> Skyscraper buildings made of glass and steel, gas-powered automobiles, high-speed bullet trains, and global communication networks.</li>
+        </ul>
+        <div class="callout-box">
+          <strong>Key Concept:</strong> Verne is celebrated as a <strong>visionary</strong> because many of the revolutionary inventions he imagined became tangible realities by the end of the 20th century.
+        </div>
+      </div>
+
+      <!-- Section: 1955 Historical Predictions -->
+      <div class="guide-card">
+        <h3>2. Predictions Made in 1955: Reality vs Fiction</h3>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>1955 Prediction Statement</th>
+              <th>Status Today</th>
+              <th>Curriculum Fact</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><em>"I seriously doubt that fast food restaurants will ever catch on."</em></td>
+              <td><strong>False Prediction</strong></td>
+              <td>Fast food chains became a global multi-billion dollar dining industry.</td>
+            </tr>
+            <tr>
+              <td><em>"$1,500 won't even buy a used car."</em></td>
+              <td><strong>True Prediction</strong></td>
+              <td>Because of inflation, modern used cars cost much more than $1,500.</td>
+            </tr>
+            <tr>
+              <td><em>"Sports players will make more money than the president."</em></td>
+              <td><strong>True Prediction</strong></td>
+              <td>Top athletes earn tens of millions yearly, far exceeding executive political salaries.</td>
+            </tr>
+            <tr>
+              <td><em>"Soon all kitchen appliances will be electric."</em></td>
+              <td><strong>True Prediction</strong></td>
+              <td>Refrigerators, dishwashers, and ovens are standard household electric appliances.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section: Grammar Rules -->
+      <div class="guide-card">
+        <h3>3. Grammar: Expressing Future & Making Predictions</h3>
+        
+        <p><strong>A. Future with 'Will' vs 'Be Going To':</strong></p>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>Structure</th>
+              <th>Primary Usage</th>
+              <th>Clear Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Will + base verb</strong></td>
+              <td>Spontaneous decisions made at speech time, offers, promises, or predictions with uncertainty (<em>maybe, probably</em>).</td>
+              <td><em>"We ran out of bread. I <strong>will go</strong> to the supermarket."</em></td>
+            </tr>
+            <tr>
+              <td><strong>Be Going To + base verb</strong></td>
+              <td>Pre-planned events, intentions, or predictions based on current visual evidence.</td>
+              <td><em>"This summer, I <strong>am going to take</strong> an art class."</em></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top: 15px;"><strong>B. Future Progressive (Continuous):</strong></p>
+        <div class="callout-box">
+          <strong>Rule:</strong> Use <code>will + be + verb(-ing)</code> OR <code>am/is/are + going to be + verb(-ing)</code> for an action that will be happening continuously at a specific point in the future.<br>
+          <em>Example:</em> "By the year 2100, humans <strong>will be living</strong> (or <strong>are going to be living</strong>) on the moon."
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 2: FULL ELECTRONIC EXAM                                   -->
+    <!-- ============================================================== -->
+    <div id="examTab" class="view-content">
+
+      <div class="student-bar">
+        <label for="studentNameInput">Student Full Name:</label>
+        <input type="text" id="studentNameInput" placeholder="Enter your full name to generate official certificate..." required>
+      </div>
+
+      <form id="worksheetForm" onsubmit="evaluateExam(event)">
+        <!-- 13 Comprehensive Sections Populated by JS -->
+        <div class="section-box"><div class="section-title">1) Choose the correct meaning of the underlined word</div><div id="sec1-qs"></div></div>
+        <div class="section-box"><div class="section-title">2) Choose the correct answer to fill in the blank</div><div id="sec2-qs"></div></div>
+        <div class="section-box">
+          <div class="section-title">3) Read the text and choose the correct answer</div>
+          <div class="reading-passage">
+            <strong>How the Internet has changed the world:</strong><br>
+            It all started in 1969 when Kline, one of Professor Kleinrock's students in LA, tried to log in remotely to a machine in Stanford.<br>
+            In 1990, Tim Berners-Lee and Robert Cailliau introduced the "Worldwide Web". About 26 years later, 16 million people were online, and email was taking over. Today there are more than four and a half billion users.<br>
+            E-mail, instant messaging and video calls connect people across the globe. Social networks allow people to communicate with a large number of friends and information is accessible to everyone online. All you need to do is "Google" a few key words and you get numerous sites and documents.<br>
+            E-learning has made it possible for people to attend courses online and obtain academic and professional qualifications.
+          </div>
+          <div id="sec3-qs"></div>
+        </div>
+        <div class="section-box"><div class="section-title">4) Match each word in Column 1 with a word in Column 2</div><div id="sec4-qs"></div></div>
+        <div class="section-box"><div class="section-title">5) Fill in the missing letters (Vocabulary & Spelling)</div><div id="sec5-qs"></div></div>
+        <div class="section-box"><div class="section-title">6) Choose the correct answer to fill in the blank</div><div id="sec6-qs"></div></div>
+        <div class="section-box"><div class="section-title">7) Choose the correct answer to fill in the blank</div><div id="sec7-qs"></div></div>
+        <div class="section-box"><div class="section-title">8) Choose the correct grammatical form</div><div id="sec8-qs"></div></div>
+        <div class="section-box"><div class="section-title">9) Fill in with the correct word: (Certainly - opinion - predict - treasure)</div><div id="sec9-qs"></div></div>
+        <div class="section-box"><div class="section-title">10) Fill in the missing letters</div><div id="sec10-qs"></div></div>
+        <div class="section-box"><div class="section-title">11) Choose the correct answer to fill in the blank</div><div id="sec11-qs"></div></div>
+        <div class="section-box"><div class="section-title">12) Fill in the missing letters</div><div id="sec12-qs"></div></div>
+        <div class="section-box">
+          <div class="section-title">13) Read the text and choose the best answer</div>
+          <div class="reading-passage">
+            <strong>Michael's Family:</strong><br>
+            Michael is a student at Liberty High School. He's seventeen years old. He comes from a big family. He has two brothers and one sister. His brothers' names are Ray and Greg. Ray is twenty years old and Greg is fifteen years old. His sister's name is Elizabeth. She's eight years old. Their mother is Iris and their father is Jack. They also have lots of aunts and uncles and cousins. Their cousin Tom is also seventeen years old. He is also a student at Liberty High School. Tom and Michael have the same teachers at school. They are best friends.
+          </div>
+          <div id="sec13-qs"></div>
+        </div>
+
+        <div style="text-align: center; margin: 35px 0;">
+          <button type="submit" class="btn-action">Submit Assessment & View Results</button>
+        </div>
+      </form>
+
+      <!-- Exam Result Summary -->
+      <div id="resultCard" class="result-card">
+        <div class="score-circle">
+          <span id="scorePercent">0%</span>
+          <span id="scoreRatio">0 / 0</span>
+        </div>
+        <h2 id="resultMsg" style="margin-bottom: 6px;">Assessment Completed</h2>
+        <p id="resultFeedback" style="color: var(--text-muted); margin-bottom: 18px;"></p>
+      </div>
+
+      <!-- Certificate Section -->
+      <div id="certificateSection">
+        <div class="certificate">
+          <div class="cert-school">ALBAYARIQ PRIVATE SCHOOLS</div>
+          <div class="cert-sub">Supervision of Educational Administration • Secondary Section</div>
+          <div class="cert-seal">ACADEMIC<br>EXCELLENCE</div>
+          <div class="cert-title">Certificate of Achievement</div>
+          <div class="cert-lead">This certificate is proudly awarded to:</div>
+          <div class="cert-name" id="certStudentName">Student Name</div>
+          <div class="cert-body">
+            For demonstrating academic excellence and outstanding competence in the English Examination (Semester 1), earning a mastery grade of <strong><span id="certGrade">80%</span></strong>.
+          </div>
+
+          <div class="cert-signatures">
+            <div class="sig-col">
+              <div class="sig-role">English Teacher</div>
+              <div class="sig-name">Dr. Amir Yagoub</div>
+            </div>
+            <div class="sig-col">
+              <div class="sig-role">English Supervisor</div>
+              <div class="sig-name">Mohammed Othman</div>
+            </div>
+            <div class="sig-col">
+              <div class="sig-role">Head of Secondary Section</div>
+              <div class="sig-name">Dr. Ibrahim Al-Osaimi</div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn-print" onclick="window.print()">🖨️ Print Certificate</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- TAB 3: WHO WANTS TO BE A MILLIONAIRE?                         -->
+    <!-- ============================================================== -->
+    <div id="gameTab" class="view-content">
+      <div class="game-screen">
+        <div class="game-header">
+          <div>
+            <h2 style="color: var(--gold); font-size: 1.35rem;">Who Wants to Be a Millionaire?</h2>
+            <p style="font-size: 0.82rem; color: #94a3b8;">Secondary English Edition • Supervised by Dr. Amir Yagoub</p>
+          </div>
+          <div class="lifelines">
+            <button id="life50" class="lifeline-btn" title="50:50 Lifeline" onclick="useFiftyFifty()">50:50</button>
+            <button id="lifeAudience" class="lifeline-btn" title="Audience Poll" onclick="useAudiencePoll()">👥</button>
+            <button id="lifeTeacher" class="lifeline-btn" title="Call Dr. Amir Yagoub" onclick="useAskTeacher()">👨‍🏫</button>
+          </div>
+        </div>
+
+        <div class="game-layout">
+          <div>
+            <div class="millionaire-q-box" id="milQuestion">Question Loading...</div>
+            <div class="millionaire-options" id="milOptionsContainer"></div>
+          </div>
+          <div class="money-ladder" id="moneyLadder"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Modal Lifeline Popup -->
+  <div class="modal-overlay" id="lifelineModal">
+    <div class="modal-box">
+      <h3 id="modalTitle">Lifeline</h3>
+      <div id="modalContent" style="font-size: 0.95rem; line-height: 1.6;"></div>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <!-- Web Audio Synthesis -->
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playBeep(freq, type, duration) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+    function soundCorrect() {
+      playBeep(523.25, 'triangle', 0.15);
+      setTimeout(() => playBeep(659.25, 'triangle', 0.25), 120);
+    }
+    function soundWrong() {
+      playBeep(220, 'sawtooth', 0.35);
+      setTimeout(() => playBeep(180, 'sawtooth', 0.45), 200);
+    }
+  </script>
+
+  <!-- Core Exam Data & Game Engine -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.view-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      const tabs = ['guideTab', 'examTab', 'gameTab'];
+      const activeIdx = tabs.indexOf(tabId);
+      if (activeIdx !== -1) {
+        document.querySelectorAll('.nav-tab-btn')[activeIdx].classList.add('active');
+      }
+    }
+
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // EXAM DATABASE
+    const examData = {
+      sec1: [
+        { q: "1. We do not know how global warming will <span class='underlined'>affect</span> our future.", opts: ["cause a change in", "cause to end", "start again", "keep"], ans: "cause a change in" },
+        { q: "2. It is important to <span class='underlined'>establish</span> laws to protect our environment.", opts: ["set up", "practice", "finish", "come across"], ans: "set up" },
+        { q: "3. They will not <span class='underlined'>launch</span> the rocket until the weather is good.", opts: ["send into space", "prepare for takeoff", "prepare for landing", "take apart"], ans: "send into space" },
+        { q: "4. We should not <span class='underlined'>take for granted</span> that we will always have fresh water.", opts: ["accept as part of life", "grant as a wish", "keep a secret", "forget about"], ans: "accept as part of life" },
+        { q: "5. Worrying about environmental issues can <span class='underlined'>make your head spin</span>.", opts: ["make you feel confused", "make you feel excited", "make you afraid", "make you laugh"], ans: "make you feel confused" }
+      ],
+      sec2: [
+        { q: "1. Nawal: What are you doing? — Sahar: I ______ my homework.", opts: ["am finishing", "have finished", "finish", "finishing"], ans: "am finishing" },
+        { q: "2. On Mondays, I always ______ at the mall.", opts: ["stop", "stops", "stopping", "is stopping"], ans: "stop" },
+        { q: "3. Many people ______ global warming.", opts: ["do not understand", "are not understanding", "not understanding", "not understand"], ans: "do not understand" },
+        { q: "4. Samir goes to college in the U.S., but he ______ in Australia this year.", opts: ["is studying", "studying", "study", "studies"], ans: "is studying" },
+        { q: "5. Linda ______ in Dubai last week.", opts: ["arrived", "arrives", "is arriving", "has arrived"], ans: "arrived" },
+        { q: "6. We ______ many interesting things since we left home.", opts: ["have seen", "see", "saw", "have saw"], ans: "have seen" },
+        { q: "7. Charles ______ his job last year.", opts: ["lost", "lose", "was losing", "has lost"], ans: "lost" }
+      ],
+      sec3: [
+        { q: "1. People have used the Internet since ______.", opts: ["the 1960s", "the 1990s", "the 1980s", "2000"], ans: "the 1960s" },
+        { q: "2. The \"Worldwide Web\" was presented by ______.", opts: ["Berners-Lee and Cailliau", "Professor Kleinrock", "Professor Kleinrock and Dailliau", "Berners-Lee and Kleinrock"], ans: "Berners-Lee and Cailliau" },
+        { q: "3. Social networks have provided access to ______.", opts: ["a large number of friends", "a large number of sites", "information", "search engines"], ans: "a large number of friends" },
+        { q: "4. People now have all of the knowledge and information in the world available to them ______.", opts: ["online", "on lines", "at their lines", "on their lines"], ans: "online" },
+        { q: "5. The Internet has made it possible for people to ______.", opts: ["attend courses online and obtain qualifications", "attend courses online and write qualifications", "obtain courses online and attend qualifications", "remember courses online and qualifications"], ans: "attend courses online and obtain qualifications" }
+      ],
+      sec4: [
+        { q: "1. Motivation is synonymous with:", opts: ["initiative", "adaptability", "sociable", "integrity", "trustworthy"], ans: "initiative" },
+        { q: "2. Honesty is synonymous with:", opts: ["integrity", "sociable", "initiative", "trustworthy", "adaptability"], ans: "integrity" },
+        { q: "3. Reliable is synonymous with:", opts: ["trustworthy", "sociable", "integrity", "initiative", "adaptability"], ans: "trustworthy" },
+        { q: "4. Friendly is synonymous with:", opts: ["sociable", "adaptability", "integrity", "initiative", "trustworthy"], ans: "sociable" },
+        { q: "5. Flexibility is synonymous with:", opts: ["adaptability", "initiative", "integrity", "sociable", "trustworthy"], ans: "adaptability" }
+      ],
+      sec5: [
+        { q: "1. b.....ologist (A scientist studying living organisms)", opts: ["biologist", "baologist", "beologist", "buologist"], ans: "biologist" },
+        { q: "2. cur.....ency (System of money in common use)", opts: ["currency", "curancy", "currencyy", "curruncy"], ans: "currency" },
+        { q: "3. feder....tion (An organized league or group)", opts: ["federation", "federetion", "federition", "federution"], ans: "federation" },
+        { q: "4. infr......structure (Basic facilities and systems)", opts: ["infrastructure", "infraastructure", "infraestructure", "infraostructure"], ans: "infrastructure" },
+        { q: "5. sat....llite (Artificial body placed in orbit)", opts: ["satellite", "satallite", "satollite", "satullite"], ans: "satellite" },
+        { q: "6. cit....zen (Legally recognized subject of a state)", opts: ["citizen", "citezen", "citzzen", "cituzen"], ans: "citizen" },
+        { q: "7. expl....ration (Action of traveling in or through an unfamiliar area)", opts: ["exploration", "explaration", "expleration", "expluration"], ans: "exploration" }
+      ],
+      sec6: [
+        { q: "1. We ______ in the same house for fifteen years.", opts: ["have lived", "live", "living", "been living"], ans: "have lived" },
+        { q: "2. She ______ that book for three days.", opts: ["has been reading", "read", "reads", "has read"], ans: "has been reading" },
+        { q: "3. Computer technology ______ quickly right now.", opts: ["is changing", "changes", "has changed", "changed"], ans: "is changing" },
+        { q: "4. I will apply for that job because I am good ______ using computers.", opts: ["at", "in", "it", "of"], ans: "at" },
+        { q: "5. I am reading that book because I am interested in ______ about birds.", opts: ["learning", "learn", "learned", "have learned"], ans: "learning" },
+        { q: "6. We ______ tennis together for years, but I have only won once.", opts: ["have been playing", "have playing", "playing", "played"], ans: "have been playing" },
+        { q: "7. By the year 2100, people ______ on the moon.", opts: ["are going to be living", "going to live", "going to be living", "are going to been living"], ans: "are going to be living" },
+        { q: "8. We need bread. I ______ to the store to buy some.", opts: ["will go", "be going", "am gone", "will going"], ans: "will go" },
+        { q: "9. This summer, I ______ an art class.", opts: ["am going to take", "am going taking", "going to take", "going take"], ans: "am going to take" },
+        { q: "10. ______ to the wedding tonight?", opts: ["Will you be going", "You go", "Will go you", "You will be going"], ans: "Will you be going" }
+      ],
+      sec7: [
+        { q: "1. A ______ is a kitchen appliance.", opts: ["refrigerator", "plate", "lawn mower", "washing machine"], ans: "refrigerator" },
+        { q: "2. A car that was owned by another person first is ______.", opts: ["a used car", "an old car", "an electric car", "a second car"], ans: "a used car" },
+        { q: "3. An exciting book about travel and discovery is ______.", opts: ["an adventure novel", "a travel book", "a future book", "a science novel"], ans: "an adventure novel" },
+        { q: "4. ______ restaurants are quick and inexpensive.", opts: ["Fast food", "Fine", "Table service", "Italian"], ans: "Fast food" },
+        { q: "5. Jules Verne was considered ______ because many of the inventions that he imagined became a reality.", opts: ["a visionary", "a vision", "an inventor", "a visitor"], ans: "a visionary" },
+        { q: "6. A vault is a place that keeps things ______.", opts: ["safe", "wet", "underground", "expensive"], ans: "safe" },
+        { q: "7. \"Certainly!\" is another word for ______ when used as a reply to a question.", opts: ["yes", "no", "maybe", "hopefully"], ans: "yes" }
+      ],
+      sec8: [
+        { q: "1. They are (live - lives - living) in Australia.", opts: ["living", "live", "lives"], ans: "living" },
+        { q: "2. They (has - have) spoken in public for 3 years.", opts: ["have", "has"], ans: "have" },
+        { q: "3. Once a week, the house (was - are - is) cleaned by Tom.", opts: ["is", "was", "are"], ans: "is" },
+        { q: "4. She should (visited - visit - visiting) her mother.", opts: ["visit", "visited", "visiting"], ans: "visit" },
+        { q: "5. The silver ring is the (small - smaller - smallest) in this show.", opts: ["smallest", "small", "smaller"], ans: "smallest" },
+        { q: "6. Charles ______ his job last year.", opts: ["lost", "lose", "was losing", "has lost"], ans: "lost" }
+      ],
+      sec9: [
+        { q: "1. I don't agree with you. I have a different ______.", opts: ["opinion", "Certainly", "predict", "treasure"], ans: "opinion" },
+        { q: "2. ______ the children will be happy if you give them chocolate.", opts: ["Certainly", "opinion", "predict", "treasure"], ans: "Certainly" },
+        { q: "3. Hidden ______ represents an interesting adventure.", opts: ["treasure", "Certainly", "opinion", "predict"], ans: "treasure" },
+        { q: "4. The Holy Qur'an ______ the events that happen nowadays.", opts: ["predicts", "opinion", "Certainly", "treasure"], ans: "predicts" }
+      ],
+      sec10: [
+        { q: "1. An....mation", opts: ["animation", "anemation", "anomation", "anumation"], ans: "animation" },
+        { q: "2. comp....ter", opts: ["computer", "compater", "competer", "compiter"], ans: "computer" },
+        { q: "3. im.....gery", opts: ["imagery", "imagary", "imagory", "imagury"], ans: "imagery" },
+        { q: "4. micro....cope", opts: ["microscope", "microacope", "microtcope", "microbcope"], ans: "microscope" },
+        { q: "5. fl....vor", opts: ["flavor", "flevor", "flivor", "fluvor"], ans: "flavor" },
+        { q: "6. an....mator", opts: ["animator", "anemator", "anomator", "anumator"], ans: "animator" },
+        { q: "7. st.....ff", opts: ["staff", "steff", "stiff", "stoff"], ans: "staff" }
+      ],
+      sec11: [
+        { q: "1. Global issues: pollution, terrorism, disease, ______.", opts: ["poverty", "integrity", "submarine", "flexibility"], ans: "poverty" },
+        { q: "2. Personal qualities: adaptability, flexibility, honesty, ______.", opts: ["integrity", "rocket", "poverty", "satellite"], ans: "integrity" },
+        { q: "3. When you have the ability to solve problems, you have ______.", opts: ["analytical skills", "organizational skills", "communication skills", "interpersonal skills"], ans: "analytical skills" },
+        { q: "4. When you have the ability to get along with other people, you have ______.", opts: ["interpersonal skills", "communication skills", "analytical skills", "computer skills"], ans: "interpersonal skills" },
+        { q: "5. A reporter is a job that requires ______. You must be able to change your plans quickly when an important news story breaks.", opts: ["adaptability", "sociability", "certainly", "initiative"], ans: "adaptability" },
+        { q: "6. Salespeople must be ______. They must enjoy talking to customers.", opts: ["sociable", "initiative", "integrity", "trustworthy"], ans: "sociable" }
+      ],
+      sec12: [
+        { q: "1. Chall.....nging", opts: ["challenging", "challanging", "challowing", "challinging"], ans: "challenging" },
+        { q: "2. Cruc...al", opts: ["crucial", "cruceal", "crucual", "crucoel"], ans: "crucial" },
+        { q: "3. Ha....ds-on", opts: ["hands-on", "hadds-on", "hamds-on", "hards-on"], ans: "hands-on" },
+        { q: "4. l.....cky", opts: ["lucky", "locky", "lacky", "lecky"], ans: "lucky" },
+        { q: "5. c.....eative", opts: ["creative", "creitive", "croative", "cruative"], ans: "creative" },
+        { q: "6. E...ficient hardworking", opts: ["efficient", "eficient", "efficent", "effecient"], ans: "efficient" },
+        { q: "7. mi......iature", opts: ["miniature", "mineature", "minuature", "minyature"], ans: "miniature" }
+      ],
+      sec13: [
+        { q: "1. The text is about ______.", opts: ["Michael's family", "Michael's aunt", "Elizabeth", "Liberty High School"], ans: "Michael's family" },
+        { q: "2. Michael's ______ name is Elizabeth.", opts: ["sister's", "sister", "sisters'", "sister'"], ans: "sister's" },
+        { q: "3. Greg's father's name is ______.", opts: ["Jack", "Ray", "Michael", "Tom"], ans: "Jack" },
+        { q: "4. Michael's ______ are Jack and Iris.", opts: ["parents", "brother and sister", "fathers", "grandparents"], ans: "parents" },
+        { q: "5. ______ probably goes to Liberty High School too.", opts: ["Greg", "Elizabeth", "Iris", "Jack"], ans: "Greg" }
+      ]
+    };
+
+    let qCounter = 0;
+    const allExamQuestions = [];
+
+    function renderExamSection(key, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = "";
+      examData[key].forEach(item => {
+        qCounter++;
+        const qId = `exam_q_${qCounter}`;
+        const shuffled = shuffleArray(item.opts);
+        allExamQuestions.push({ id: qId, correct: item.ans });
+
+        const div = document.createElement("div");
+        div.className = "q-container";
+        div.id = `box_${qId}`;
+
+        let optsHtml = `<div class="options-grid">`;
+        shuffled.forEach(opt => {
+          optsHtml += `
+            <label class="option-label" id="lbl_${qId}_${opt.replace(/[^a-zA-Z0-9]/g, '_')}">
+              <input type="radio" name="${qId}" value="${opt}" required>
+              <span>${opt}</span>
+            </label>
+          `;
+        });
+        optsHtml += `</div>`;
+
+        div.innerHTML = `<div class="q-text">${item.q}</div>${optsHtml}`;
+        container.appendChild(div);
+      });
+    }
+
+    function initFullExam() {
+      for (let i = 1; i <= 13; i++) {
+        renderExamSection(`sec${i}`, `sec${i}-qs`);
+      }
+    }
+    initFullExam();
+
+    function evaluateExam(e) {
+      e.preventDefault();
+      const studentName = document.getElementById("studentNameInput").value.trim();
+      if (!studentName) {
+        alert("Please enter your full name before submitting!");
+        document.getElementById("studentNameInput").focus();
+        return;
+      }
+
+      let score = 0;
+      allExamQuestions.forEach(item => {
+        const checked = document.querySelector(`input[name="${item.id}"]:checked`);
+        const box = document.getElementById(`box_${item.id}`);
+        const labels = box.querySelectorAll(".option-label");
+
+        labels.forEach(l => l.classList.remove("is-correct", "is-wrong"));
+
+        if (checked) {
+          const val = checked.value;
+          const chosenLabel = document.getElementById(`lbl_${item.id}_${val.replace(/[^a-zA-Z0-9]/g, '_')}`);
+          const correctLabel = document.getElementById(`lbl_${item.id}_${item.correct.replace(/[^a-zA-Z0-9]/g, '_')}`);
+
+          if (val.trim().toLowerCase() === item.correct.trim().toLowerCase()) {
+            score++;
+            if (chosenLabel) chosenLabel.classList.add("is-correct");
+          } else {
+            if (chosenLabel) chosenLabel.classList.add("is-wrong");
+            if (correctLabel) correctLabel.classList.add("is-correct");
+          }
+        }
+      });
+
+      const total = allExamQuestions.length;
+      const percentage = Math.round((score / total) * 100);
+
+      const resultCard = document.getElementById("resultCard");
+      const certSection = document.getElementById("certificateSection");
+      resultCard.style.display = "block";
+      document.getElementById("scorePercent").textContent = `${percentage}%`;
+      document.getElementById("scoreRatio").textContent = `${score} / ${total}`;
+
+      if (percentage >= 80) {
+        soundCorrect();
+        document.getElementById("resultMsg").textContent = "Outstanding Achievement! 🎉";
+        document.getElementById("resultMsg").style.color = "#059669";
+        document.getElementById("resultFeedback").textContent = "You met the criteria (80% or higher). Your certificate has been issued below.";
+        certSection.style.display = "block";
+        document.getElementById("certStudentName").textContent = studentName;
+        document.getElementById("certGrade").textContent = `${percentage}%`;
+        certSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        soundWrong();
+        document.getElementById("resultMsg").textContent = "Keep Practicing! 👍";
+        document.getElementById("resultMsg").style.color = "#d97706";
+        document.getElementById("resultFeedback").textContent = `You scored ${percentage}%. You need at least 80% to earn the Certificate of Achievement. Review the highlighted corrections and try again!`;
+        certSection.style.display = "none";
+        resultCard.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // ==============================================================
+    // MILLIONAIRE GAME DATA & ENGINE
+    // ==============================================================
+    const millionaireBank = [
+      { q: "What is another meaning for 'establish'?", opts: ["set up", "finish", "come across", "practice"], ans: "set up" },
+      { q: "Sahar: 'I ______ my homework right now.'", opts: ["am finishing", "finish", "finishing", "have finished"], ans: "am finishing" },
+      { q: "The 'Worldwide Web' was introduced in 1990 by:", opts: ["Berners-Lee and Cailliau", "Professor Kleinrock", "Kline", "Stanford Univ."], ans: "Berners-Lee and Cailliau" },
+      { q: "Which personal quality is another word for 'initiative'?", opts: ["motivation", "sociable", "integrity", "adaptability"], ans: "motivation" },
+      { q: "Complete the spelling: 'sat....llite'", opts: ["satellite", "satallite", "satollite", "satullite"], ans: "satellite" },
+      { q: "We ______ in the same house for fifteen years.", opts: ["have lived", "live", "living", "been living"], ans: "have lived" },
+      { q: "A refrigerator is classified as a:", opts: ["kitchen appliance", "lawn mower", "scientific tool", "vehicle"], ans: "kitchen appliance" },
+      { q: "Once a week, the house ______ cleaned by Tom.", opts: ["is", "was", "are", "were"], ans: "is" },
+      { q: "Which word means 'an interesting adventure with hidden wealth'?", opts: ["treasure", "opinion", "predict", "certainly"], ans: "treasure" },
+      { q: "Which is a global issue alongside pollution and disease?", opts: ["poverty", "integrity", "submarine", "flexibility"], ans: "poverty" },
+      { q: "The ability to get along well with others is called:", opts: ["interpersonal skills", "analytical skills", "rocket science", "computer skills"], ans: "interpersonal skills" },
+      { q: "Salespeople must be ______ because they enjoy talking to people.", opts: ["sociable", "miniature", "reluctant", "isolated"], ans: "sociable" },
+      { q: "In Michael's family, who is his 15-year-old brother?", opts: ["Greg", "Ray", "Tom", "Jack"], ans: "Greg" },
+      { q: "Worrying about environmental issues can make your head ______.", opts: ["spin", "jump", "stop", "laugh"], ans: "spin" },
+      { q: "Jules Verne was considered a ______ because his imagined inventions became reality.", opts: ["visionary", "visitor", "mechanic", "carpenter"], ans: "visionary" }
+    ];
+
+    const prizeValues = [
+      "$100", "$200", "$300", "$500", "$1,000",
+      "$2,000", "$4,000", "$8,000", "$16,000", "$32,000",
+      "$64,000", "$125,000", "$250,000", "$500,000", "$1,000,000"
+    ];
+
+    let currentMilIdx = 0;
+    let milQuestions = [];
+    let lifeline50Used = false;
+    let lifelineAudienceUsed = false;
+    let lifelineTeacherUsed = false;
+
+    function buildMoneyLadder() {
+      const ladder = document.getElementById("moneyLadder");
+      ladder.innerHTML = "";
+      prizeValues.forEach((val, idx) => {
+        const step = document.createElement("div");
+        step.className = `ladder-step ${idx === 4 || idx === 9 || idx === 14 ? 'milestone' : ''}`;
+        step.id = `step_${idx}`;
+        step.innerHTML = `<span>${idx + 1}</span> <span>${val}</span>`;
+        ladder.appendChild(step);
+      });
+    }
+
+    function initMillionaire() {
+      milQuestions = shuffleArray(millionaireBank);
+      currentMilIdx = 0;
+      lifeline50Used = false;
+      lifelineAudienceUsed = false;
+      lifelineTeacherUsed = false;
+
+      document.getElementById("life50").disabled = false;
+      document.getElementById("lifeAudience").disabled = false;
+      document.getElementById("lifeTeacher").disabled = false;
+
+      buildMoneyLadder();
+      loadMilQuestion();
+    }
+
+    function loadMilQuestion() {
+      if (currentMilIdx >= milQuestions.length) {
+        soundCorrect();
+        alert("🎉 CHAMPION! You answered all questions correctly and won the $1,000,000 Grand Prize!");
+        initMillionaire();
+        return;
+      }
+
+      prizeValues.forEach((_, idx) => {
+        const el = document.getElementById(`step_${idx}`);
+        if (el) el.classList.remove("current");
+      });
+      const activeStep = document.getElementById(`step_${currentMilIdx}`);
+      if (activeStep) activeStep.classList.add("current");
+
+      const curr = milQuestions[currentMilIdx];
+      document.getElementById("milQuestion").innerHTML = `Question ${currentMilIdx + 1} (${prizeValues[currentMilIdx]}):<br>${curr.q}`;
+      
+      const shuffled = shuffleArray(curr.opts);
+      const container = document.getElementById("milOptionsContainer");
+      container.innerHTML = "";
+
+      const letters = ["A", "B", "C", "D"];
+      shuffled.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.className = "mil-btn";
+        btn.innerHTML = `<strong>${letters[i]}:</strong> ${opt}`;
+        btn.onclick = () => selectMillionaireAnswer(btn, opt, curr.ans);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectMillionaireAnswer(btn, chosen, correct) {
+      const btns = document.querySelectorAll(".mil-btn");
+      btns.forEach(b => b.disabled = true);
+      btn.classList.add("selected");
+
+      setTimeout(() => {
+        if (chosen.trim().toLowerCase() === correct.trim().toLowerCase()) {
+          soundCorrect();
+          btn.classList.remove("selected");
+          btn.classList.add("correct-glow");
+          setTimeout(() => {
+            currentMilIdx++;
+            loadMilQuestion();
+          }, 1100);
+        } else {
+          soundWrong();
+          btn.classList.remove("selected");
+          btn.classList.add("wrong-glow");
+          btns.forEach(b => {
+            if (b.innerText.toLowerCase().includes(correct.toLowerCase())) {
+              b.classList.add("correct-glow");
+            }
+          });
+          setTimeout(() => {
+            alert(`Game Over! Correct answer was: ${correct}`);
+            initMillionaire();
+          }, 1500);
+        }
+      }, 700);
+    }
+
+    function useFiftyFifty() {
+      if (lifeline50Used) return;
+      lifeline50Used = true;
+      document.getElementById("life50").disabled = true;
+
+      const curr = milQuestions[currentMilIdx];
+      const btns = Array.from(document.querySelectorAll(".mil-btn"));
+      let wrongBtns = btns.filter(b => !b.innerText.toLowerCase().includes(curr.ans.toLowerCase()));
+      wrongBtns = shuffleArray(wrongBtns);
+
+      if (wrongBtns[0]) wrongBtns[0].style.visibility = "hidden";
+      if (wrongBtns[1]) wrongBtns[1].style.visibility = "hidden";
+    }
+
+    function useAudiencePoll() {
+      if (lifelineAudienceUsed) return;
+      lifelineAudienceUsed = true;
+      document.getElementById("lifeAudience").disabled = true;
+
+      const curr = milQuestions[currentMilIdx];
+      openModal("Audience Poll Results", `
+        Audience voting breakdown:<br><br>
+        ⭐ <strong>${curr.ans}</strong>: 81%<br>
+        Other options: 19% combined.<br><br>
+        <em>The studio audience is highly confident in this answer!</em>
+      `);
+    }
+
+    function useAskTeacher() {
+      if (lifelineTeacherUsed) return;
+      lifelineTeacherUsed = true;
+      document.getElementById("lifeTeacher").disabled = true;
+
+      const curr = milQuestions[currentMilIdx];
+      openModal("Call Dr. Amir Yagoub", `
+        📞 <strong>Dr. Amir Yagoub advice:</strong><br><br>
+        <em>"Hello! Based on our curriculum in Unit 3, the correct and definite answer is clearly <strong>'${curr.ans}'</strong>. Select it without hesitation!"</em>
+      `);
+    }
+
+    function openModal(title, text) {
+      document.getElementById("modalTitle").innerHTML = title;
+      document.getElementById("modalContent").innerHTML = text;
+      document.getElementById("lifelineModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("lifelineModal").style.display = "none";
+    }
+
+    initMillionaire();
+  </script>
+</body>
+</html>
